@@ -38,6 +38,36 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestRetriveIgnoreSubstrings (t *testing.T) {
+	node := new(Node)
+	value := []byte{'a', 'b', 'c', 'd', 'e'}
+
+	node.Insert(value)
+
+	if node.HasValue([]byte{'a', 'b', 'c', 'd'}) {
+		t.Fail()
+	}
+}
+
+func TestRetrieve(t *testing.T) {
+	node := new(Node)
+
+	node.Insert([]byte{'a', 'b', 'c', 'd', 'e'})
+	node.Insert([]byte{'a', 'b', 'c'})
+
+	if node.HasValue([]byte{'a', 'b', 'c', 'd'}) {
+		t.Fail()
+	}
+
+	if !node.HasValue([]byte{'a', 'b', 'c'}) {
+		t.Fail()
+	}
+
+	if !node.HasValue([]byte{'a', 'b', 'c', 'd', 'e'}) {
+		t.Fail()
+	}
+}
+
 var benchSearchValues = [][]byte{
 	[]byte("abcdefghijklmnopqrstuvwxyz"),
 	[]byte("abcdefghijklmnopqrstuvabcd"),

@@ -25,6 +25,7 @@
  package bytetrie
 
  type Node struct {
+	IsLeaf bool
 	Children [255]*Node
  }
 
@@ -53,16 +54,22 @@ func (n* Node) HasValue(byteArray []byte) bool {
 		}
 	}
 
-	return true
+	return currentTestNode.IsLeaf
 }
 
 func (n *Node) Insert(search []byte) {
 	var currentNode = n
-	for _, b := range search {
+	var lastIndex = len(search) - 1
+
+	for index, b := range search {
 		if currentNode.HasChild(b) {
 			currentNode = currentNode.GetChild(b)
 		} else {
 			currentNode = currentNode.AddChild(b)
+		}
+
+		if index == lastIndex {
+			currentNode.IsLeaf = true
 		}
 	}
 }

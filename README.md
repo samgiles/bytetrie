@@ -54,6 +54,8 @@ go test
 go test -bench .
 ```
 
+Current build status: [![Build Status](https://travis-ci.org/samgiles/bytetrie.svg?branch=master)](https://travis-ci.org/samgiles/bytetrie)
+
 
 # License
 
